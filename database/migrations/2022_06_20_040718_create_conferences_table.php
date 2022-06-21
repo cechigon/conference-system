@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('conferences', function (Blueprint $table) {
             $table->id();
             $table->string('conference_name');
-            $table->tinyInteger('class');
+            $table->tinyInteger('class_number');
             $table->timestamp('deadline');
             $table->time('start_time');
             $table->time('end_time');
