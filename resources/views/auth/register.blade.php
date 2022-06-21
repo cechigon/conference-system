@@ -26,6 +26,20 @@
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
             </div>
 
+            <!-- class -->
+            <div class="mt-4">
+                <x-label for="class_number" :value="__('Class_number')" />
+
+                <x-input id="class_number" class="block mt-1 w-full" type="text" name="class_number" :value="old('class_number')" required autofocus />
+            </div>
+
+            <!-- student -->
+            <div class="mt-4">
+                <x-label for="student_number" :value="__('Student_number')" />
+
+                <x-input id="student_number" class="block mt-1 w-full" type="text" name="student_number" :value="old('student_number')" required autofocus />
+            </div>
+
             <!-- Password -->
             <div class="mt-4">
                 <x-label for="password" :value="__('Password')" />

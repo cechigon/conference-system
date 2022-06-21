@@ -20,9 +20,9 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->tinyInteger('class');
+            $table->tinyInteger('class_number');
             $table->tinyInteger('student_number');
-            $table->tinyInteger('role');
+            $table->tinyInteger('role')->default(0);
             $table->timestamps();
         });
     }
