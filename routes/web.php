@@ -22,7 +22,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/list', [ConferenceController::class, 'list'])
-    ->name('list');
+Route::get('/conference', [ConferenceController::class, 'list'])
+    ->name('conference.list');
+
+Route::get('/conference/entry/{id}', [ConferenceController::class, 'entry'])
+    ->name('conference.entry');
 
 require __DIR__ . '/auth.php';

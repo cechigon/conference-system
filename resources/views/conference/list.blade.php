@@ -22,16 +22,17 @@
                     @foreach ($conferences as $conference)
                         <article class="box">
                             <h1>タイトル : {{ $conference->conference_name }}</h1>
+                            <p>ID : {{ $conference->id }}</p>
                             <p>クラス : {{ $conference->class_number }}</p>
                             <p>締め切り : {{ date('Y/m/d H:i:s', strtotime($conference->deadline)) }}</p>
                             <p>開始 : {{ date('H:i:s', strtotime($conference->start_time)) }}</p>
                             <p>終了 : {{ date('H:i:s', strtotime($conference->end_time)) }}</p>
                             <p>設定者 : {{ $conference->author }}</p>
-                            <p>場所 : {{$conference->location}}</p>
-                            <p>備考 : {{$conference->note}}</p>
+                            <p>場所 : {{ $conference->location }}</p>
+                            <p>備考 : {{ $conference->note }}</p>
                             <p>作成日 : {{ date('Y/m/d H:i:s', strtotime($conference->created_at)) }}</p>
                             <p>更新⽇ : {{ date('Y/m/d H:i:s', strtotime($conference->updated_at)) }}</p>
-                            <p>参加確認</p>
+                            <p><a href="{{ route('conference.entry', ['id' => $conference->id]) }}">出欠確認</a></p>
                         </article>
                     @endforeach
                 </div>
