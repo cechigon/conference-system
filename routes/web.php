@@ -37,4 +37,7 @@ Route::get('/conference/situation/{id}', [ConferenceController::class, 'situatio
 Route::get('/conference/attendance/{id}', [ConferenceController::class, 'attendance'])
     ->name('conference.attendance');
 
+Route::post('/conference/attendanced', [ConferenceController::class, 'attendanced'])
+    ->name('conference.attendanced');
+
 require __DIR__ . '/auth.php';
