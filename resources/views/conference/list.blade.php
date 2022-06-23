@@ -25,6 +25,7 @@
                             <p>ID : {{ $conference->id }}</p>
                             <p>クラス : {{ $conference->class_number }}</p>
                             <p>締め切り : {{ date('Y/m/d H:i:s', strtotime($conference->deadline)) }}</p>
+                            <p>日時 : {{ date('Y/m/d', strtotime($conference->date)) }}</p>
                             <p>開始 : {{ date('H:i:s', strtotime($conference->start_time)) }}</p>
                             <p>終了 : {{ date('H:i:s', strtotime($conference->end_time)) }}</p>
                             <p>設定者 : {{ $conference->author }}</p>

@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
-class ConferencesTableSeeder extends Seeder
+class Personal_interviewsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,17 +17,12 @@ class ConferencesTableSeeder extends Seeder
     public function run()
     {
         for ($i = 1; $i <= 5; $i++) {
-            DB::table('conferences')->insert([
-                'conference_name' => "テスト $i",
-                'class_number' => "$i" . "1",
-                'deadline' => Carbon::now(),
-                'date' => '20220801',
-                'start_time' => '09:00:00',
-                'end_time' => '10:00:00',
+            DB::table('personal_interviews')->insert([
+                'conferences_id' => $i,
+                'start' => '10:00:00',
                 'location' => 'そこら辺',
-                'note' => 'とくになし',
                 'author' => 99,
-                'attendances_url' => uniqid(),
+                'minutes' => 10,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]);

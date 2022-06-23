@@ -23,6 +23,7 @@
                         <p>タイトル : {{ $attendance->conference_name }}</p>
                         <p>クラス : {{ $attendance->class_number }}</p>
                         <p>締め切り : {{ date('Y/m/d H:i:s', strtotime($attendance->deadline)) }}</p>
+                        <p>日時 : {{ date('Y/m/d', strtotime($attendance->date)) }}</p>
                         <p>開始 : {{ date('H:i:s', strtotime($attendance->start_time)) }}</p>
                         <p>終了 : {{ date('H:i:s', strtotime($attendance->end_time)) }}</p>
                         <p>場所 : {{ $attendance->location }}</p>

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('conference_name');
             $table->tinyInteger('class_number');
             $table->timestamp('deadline');
+            $table->date('date');
             $table->time('start_time');
             $table->time('end_time');
             $table->string('location');

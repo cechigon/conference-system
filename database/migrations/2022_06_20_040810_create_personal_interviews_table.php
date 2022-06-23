@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('personal_interviews', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('conferences_id');
-            $table->timestamp('start');
+            $table->time('start');
             $table->string('location');
             $table->unsignedTinyInteger('minutes');
             $table->unsignedBigInteger('author');

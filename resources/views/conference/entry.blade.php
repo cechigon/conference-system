@@ -21,7 +21,7 @@
                 if (arr_radioBoxes[1].checked) {
                     return true;
                 } else {
-                    window.alert("1つ以上選択してください。");
+                    window.alert("出席者を1つ以上選択してください。");
                     return false;
                 }
             };
