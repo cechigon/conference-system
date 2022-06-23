@@ -5,6 +5,29 @@
     <meta charset="UTF-8" />
     <title>Laravel</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
+    <script>
+        function isCheck() {
+            let arr_checkBoxes = document.getElementsByClassName("check");
+            let arr_radioBoxes = document.getElementsByClassName("radio");
+            let count = 0;
+            for (let i = 0; i < arr_checkBoxes.length; i++) {
+                if (arr_checkBoxes[i].checked) {
+                    count++;
+                }
+            }
+            if (count > 0) {
+                return true;
+            } else {
+                if (arr_radioBoxes[1].checked) {
+                    return true;
+                } else {
+                    window.alert("1つ以上選択してください。");
+                    return false;
+                }
+            };
+
+        }
+    </script>
 </head>
 
 <body>
@@ -28,16 +51,44 @@
                         <p>場所 : {{ $conference->location }}</p>
                         <p>備考 : {{ $conference->note }}</p>
                         </br>
-                        <p>- 出欠</p>
-                        <div>
-                            <label><input type="radio" name="radio" class="radio" value="チェック１">出席</label>
-                            <label><input type="radio" name="radio" class="radio" value="チェック2">欠席</label>
-                        </div>
-                        <p>- 出席者</p>
-                        <div>
-                            <p><label><input type="checkbox" name="browser" value="father">父</label></p>
-                            <p><label><input type="checkbox" name="browser" value="mather">母</label></p>
-                            <p><label><input type="checkbox" name="browser" value="other">その他</label></p>
+
+                        <div class="modal-footer">
+                            <form id="form" method="POST" action="{{ route('conference.registration') }}"
+                                class="form-inline">
+                                @csrf
+                                <div class="form-group mx-sm-3">
+                                    <p>- 出欠</p>
+                                    <div>
+                                        <label><input type="radio" name="entry" class="radio" value="attendance"
+                                                @if (!empty($attendance->entry)) checked="checked" @endif
+                                                required>出席</label>
+                                        <label><input type="radio" name="entry" class="radio" value="absence"
+                                                @if (empty($attendance->entry)) checked="checked" @endif
+                                                required>欠席</label>
+                                    </div>
+                                    <div id="p1">
+                                        <p>- 出席者</p>
+                                        <div>
+                                            <p><label><input type="checkbox" class="check" name="father"
+                                                        value="father"
+                                                        @if (!empty($attendance->father)) checked="checked" @endif>父</label>
+                                            </p>
+                                            <p><label><input type="checkbox" class="check" name="mother"
+                                                        value="mother"
+                                                        @if (!empty($attendance->mother)) checked="checked" @endif>母</label>
+                                            </p>
+                                            <p><label><input type="checkbox" class="check" name="other"
+                                                        value="other"
+                                                        @if (!empty($attendance->other)) checked="checked" @endif>その他</label>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <input type="hidden" name="conference_id" value="{{ $conference->id }}">
+                                    </div>
+                                </div>
+                                <input type="submit" class="btn btn-primary" onclick="return isCheck()" value="Submit">
+                            </form>
                         </div>
                         </br>
                         <a href="#" onclick="history.back(-1);return false;">戻る</a>

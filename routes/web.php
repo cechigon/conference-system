@@ -28,4 +28,13 @@ Route::get('/conference', [ConferenceController::class, 'list'])
 Route::get('/conference/entry/{id}', [ConferenceController::class, 'entry'])
     ->name('conference.entry');
 
+Route::post('/conference/registration/', [ConferenceController::class, 'registration'])
+    ->name('conference.registration');
+
+Route::get('/conference/situation/{id}', [ConferenceController::class, 'situation'])
+    ->name('conference.situation');
+
+Route::get('/conference/attendance/{id}', [ConferenceController::class, 'attendance'])
+    ->name('conference.attendance');
+
 require __DIR__ . '/auth.php';

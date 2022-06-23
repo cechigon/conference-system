@@ -26,6 +26,7 @@ class ConferencesTableSeeder extends Seeder
                 'location' => 'そこら辺',
                 'note' => 'とくになし',
                 'author' => $i,
+                'attendances_url' => uniqid(),
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]);

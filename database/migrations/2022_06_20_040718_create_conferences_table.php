@@ -22,6 +22,7 @@ return new class extends Migration
             $table->time('end_time');
             $table->string('location');
             $table->string('note');
+            $table->string('attendances_url');
             $table->unsignedBigInteger('author');
             $table->timestamps();
         });
