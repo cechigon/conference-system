@@ -19,6 +19,11 @@ class ConferenceController extends Controller
         ]);
     }
 
+    public function create()
+    {
+        return view('conference.create');
+    }
+
     public function entry($id)
     {
         $attendance = Attendances::where('conferences_id', $id)->where('users_id', 1)->get()->first();
