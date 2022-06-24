@@ -17,7 +17,7 @@
     </header>
     <div class="section">
         <div class="container">
-            <form method="POST" action="">
+            <form method="POST" action="{{ route('conference.created') }}">
                 @csrf
                 <div class="form-group">
                     <label>保護者会名</label>

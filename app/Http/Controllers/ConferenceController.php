@@ -24,6 +24,26 @@ class ConferenceController extends Controller
         return view('conference.create');
     }
 
+    public function created(Request $request)
+    {
+        $conference = new Conferences();
+
+        $conference->conference_name = $request->conference_name;
+        $conference->class_number = $request->class_number;
+        $conference->deadline = $request->deadline;
+        $conference->date = $request->date;
+        $conference->start_time = $request->start_time;
+        $conference->end_time = $request->end_time;
+        $conference->location = $request->location;
+        $conference->note = $request->note;
+        $conference->attendances_url = uniqid();
+        $conference->author = 99;
+
+        $conference->save();
+
+        return redirect(route('conference.list'));
+    }
+
     public function entry($id)
     {
         $attendance = Attendances::where('conferences_id', $id)->where('users_id', 1)->get()->first();
