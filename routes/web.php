@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ConferenceController;
+use App\Http\Controllers\PersonalInterviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,5 +46,11 @@ Route::get('/conference/create', [ConferenceController::class, 'create'])
 
 Route::post('/conference/created', [ConferenceController::class, 'created'])
     ->name('conference.created');
+
+Route::get('/personal_interview/create', [PersonalInterviewController::class, 'create'])
+    ->name('personal_interview.created');
+
+Route::post('/personal_interview/created', [PersonalInterviewController::class, 'created'])
+    ->name('personal_interview.created');
 
 require __DIR__ . '/auth.php';

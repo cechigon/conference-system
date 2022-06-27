@@ -90,7 +90,11 @@ class ConferenceController extends Controller
 
     public function attendance($id)
     {
-        $attendance = Conferences::where('attendances_url', $id)->join('attendances', 'conferences_id', '=', 'conferences.id')->first();
+        $attendance = Attendances::where('attendances_url', $id)->join('conferences', 'conferences.id', '=', 'conferences_id')->first();
+
+        if (!$attendance) {
+            abort(404);
+        }
 
         return view('conference.attendance', [
             'attendance' => $attendance,
