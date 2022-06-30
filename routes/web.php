@@ -53,4 +53,10 @@ Route::get('/personal_interview/create', [PersonalInterviewController::class, 'c
 Route::post('/personal_interview/created', [PersonalInterviewController::class, 'created'])
     ->name('personal_interview.created');
 
+Route::get('/personal_interview/entry/{id}', [PersonalInterviewController::class, 'entry'])
+    ->name('personal_interview.entry');
+
+Route::post('/personal_interview/registration/', [PersonalInterviewController::class, 'registration'])
+    ->name('personal_interview.registration');
+
 require __DIR__ . '/auth.php';
