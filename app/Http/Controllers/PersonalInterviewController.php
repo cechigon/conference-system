@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Personal_interviews;
 use App\Models\Personal_interviews_attendances;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class PersonalInterviewController extends Controller
 {
@@ -54,7 +55,10 @@ class PersonalInterviewController extends Controller
 
     public function situation($id)
     {
-        $attendances = Personal_interviews_attendances::where('personal_interviews_id', $id)->get();
+        //$attendances = Personal_interviews_attendances::where('personal_interviews_id', $id)->get();
+
+        DB::statement(DB::raw('set @row:=0'));
+        $attendances = Personal_interviews_attendances::selectRaw('*, @row:=@row+1 as row')->where('personal_interviews_id', $id)->get();
 
         return view('personal_interview.situation', [
             'attendances' => $attendances,

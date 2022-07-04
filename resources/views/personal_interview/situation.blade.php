@@ -23,6 +23,7 @@
                         <table class="table">
                             <thead>
                                 <tr>
+                                    <th scope="col">row</th>
                                     <th scope="col">id</th>
                                     <th scope="col">personal_interviews_id</th>
                                     <th scope="col">users_id</th>
@@ -37,11 +38,12 @@
                             <tbody>
                                 @foreach ($attendances as $attendance)
                                     <tr>
+                                        <td>{{ $attendance->row }}</td>
                                         <td>{{ $attendance->id }}</td>
                                         <td>{{ $attendance->personal_interviews_id }}</td>
                                         <td>{{ $attendance->users_id }}</td>
-                                        <td>{{ date('H:i:s', strtotime($attendance->start)) }}</td>
-                                        <td>{{ date('H:i:s', strtotime($attendance->end)) }}</td>
+                                        <td>@if (!is_null($attendance->start)) {{ date('H:i:s', strtotime($attendance->start)) }} @else null @endif</td>
+                                        <td>@if (!is_null($attendance->end)) {{ date('H:i:s', strtotime($attendance->end)) }} @else null @endif</td>
                                         <td>{{ date('Y/m/d H:i:s', strtotime($attendance->created_at)) }}</td>
                                         <td>{{ date('Y/m/d H:i:s', strtotime($attendance->updated_at)) }}</td>
                                         <td>
