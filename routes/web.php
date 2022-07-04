@@ -59,4 +59,13 @@ Route::get('/personal_interview/entry/{id}', [PersonalInterviewController::class
 Route::post('/personal_interview/registration/', [PersonalInterviewController::class, 'registration'])
     ->name('personal_interview.registration');
 
+Route::get('/personal_interview/situation/{id}', [PersonalInterviewController::class, 'situation'])
+    ->name('personal_interview.situation');
+
+Route::post('/personal_interview/situation/start', [PersonalInterviewController::class, 'start'])
+    ->name('personal_interview.start');
+
+Route::post('/personal_interview/situation/end', [PersonalInterviewController::class, 'end'])
+    ->name('personal_interview.end');
+
 require __DIR__ . '/auth.php';

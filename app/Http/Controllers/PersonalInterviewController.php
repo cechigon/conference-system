@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Personal_interviews;
 use App\Models\Personal_interviews_attendances;
+use Carbon\Carbon;
 
 class PersonalInterviewController extends Controller
 {
@@ -39,15 +40,42 @@ class PersonalInterviewController extends Controller
 
     public function registration(Request $request)
     {
-        if (empty(Personal_interviews_attendances::where('personal_interviews_id', $request->personal_interviews_id)->where('users_id', 2)->get()->first())) {
+        if (empty(Personal_interviews_attendances::where('personal_interviews_id', $request->personal_interviews_id)->where('users_id', 1)->get()->first())) {
             $attendance = new Personal_interviews_attendances();
 
             $attendance->personal_interviews_id = $request->personal_interviews_id;
-            $attendance->users_id = 2;
+            $attendance->users_id = 1;
 
             $attendance->save();
         }
 
         return redirect(route('conference.list'));
+    }
+
+    public function situation($id)
+    {
+        $attendances = Personal_interviews_attendances::where('personal_interviews_id', $id)->get();
+
+        return view('personal_interview.situation', [
+            'attendances' => $attendances,
+        ]);
+    }
+
+    public function start(Request $request)
+    {
+        $attendance = Personal_interviews_attendances::find($request->id);
+        $attendance->start = Carbon::now();
+        $attendance->save();
+
+        return redirect(route('personal_interview.situation', ['id' => $attendance->personal_interviews_id]));
+    }
+
+    public function end(Request $request)
+    {
+        $attendance = Personal_interviews_attendances::find($request->id);
+        $attendance->end = Carbon::now();
+        $attendance->save();
+
+        return redirect(route('personal_interview.situation', ['id' => $attendance->personal_interviews_id]));
     }
 }

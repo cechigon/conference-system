@@ -35,8 +35,7 @@
                                 @csrf
                                 <div class="form-group mx-sm-3">
                                     <div>
-                                        <input type="hidden" name="personal_interviews_id"
-                                            value="{{ $interview->id }}">
+                                        <input type="hidden" name="personal_interviews_id" value="{{ $interview->id }}">
                                     </div>
                                     <input type="submit" class="btn btn-primary" value="申込み">
                                 </div>
