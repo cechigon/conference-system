@@ -15,6 +15,7 @@
             </div>
         </div>
     </header>
+    <!-- {{var_dump($attendances)}} -->
     <div class="section">
         <div class="container">
             <div class="columns">
@@ -25,10 +26,10 @@
                                 <tr>
                                     <th scope="col">row</th>
                                     <th scope="col">id</th>
-                                    <th scope="col">personal_interviews_id</th>
                                     <th scope="col">users_id</th>
                                     <th scope="col">start</th>
                                     <th scope="col">end</th>
+                                    <th scope="col">attendance_at</th>
                                     <th scope="col">created_at</th>
                                     <th scope="col">updated_at</th>
                                     <th scope="col">開始</th>
@@ -39,11 +40,11 @@
                                 @foreach ($attendances as $attendance)
                                     <tr>
                                         <td>{{ $attendance->row }}</td>
-                                        <td>{{ $attendance->id }}</td>
-                                        <td>{{ $attendance->personal_interviews_id }}</td>
+                                        <td>{{ $attendance->pid }}</td>
                                         <td>{{ $attendance->users_id }}</td>
                                         <td>@if (!is_null($attendance->start)) {{ date('H:i:s', strtotime($attendance->start)) }} @else null @endif</td>
                                         <td>@if (!is_null($attendance->end)) {{ date('H:i:s', strtotime($attendance->end)) }} @else null @endif</td>
+                                        <td>{{ date('Y/m/d H:i:s', strtotime($attendance->attendance_at)) }}</td>
                                         <td>{{ date('Y/m/d H:i:s', strtotime($attendance->created_at)) }}</td>
                                         <td>{{ date('Y/m/d H:i:s', strtotime($attendance->updated_at)) }}</td>
                                         <td>
@@ -54,7 +55,7 @@
                                                 <div class="form-group mx-sm-3">
                                                     <div>
                                                         <input type="hidden" name="id"
-                                                            value="{{ $attendance->id }}">
+                                                            value="{{ $attendance->pid }}">
                                                     </div>
                                                     <input type="submit" class="btn btn-primary" value="開始">
                                                 </div>
@@ -68,7 +69,7 @@
                                                 <div class="form-group mx-sm-3">
                                                     <div>
                                                         <input type="hidden" name="id"
-                                                            value="{{ $attendance->id }}">
+                                                            value="{{ $attendance->pid }}">
                                                     </div>
                                                     <input type="submit" class="btn btn-primary" value="終了">
                                                 </div>

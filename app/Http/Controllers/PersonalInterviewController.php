@@ -56,9 +56,29 @@ class PersonalInterviewController extends Controller
     public function situation($id)
     {
         //$attendances = Personal_interviews_attendances::where('personal_interviews_id', $id)->get();
+        //$attendances = Personal_interviews_attendances::selectRaw('*, @row:=@row+1 as row')->where('personal_interviews_id', $id)->get();
 
-        DB::statement(DB::raw('set @row:=0'));
-        $attendances = Personal_interviews_attendances::selectRaw('*, @row:=@row+1 as row')->where('personal_interviews_id', $id)->get();
+        $count = DB::table('attendances')
+        ->orderBy('attendance_at', 'desc')
+        ->selectRaw('personal_interviews_attendances.id as pid, attendances.users_id, attendances.attendance_at, personal_interviews_attendances.start, personal_interviews_attendances.end, personal_interviews_attendances.created_at, personal_interviews_attendances.updated_at')->where('personal_interviews.id', $id)
+        ->join('personal_interviews', 'attendances.conferences_id', '=', 'personal_interviews.conferences_id')
+        ->leftjoin('personal_interviews_attendances', function ($join) {
+            $join->on('personal_interviews.id', '=', 'personal_interviews_id')
+                ->on('attendances.users_id', '=', 'personal_interviews_attendances.users_id');
+        })->count();
+
+        DB::statement(DB::raw('set @row:=' . $count . '+1'));
+
+        $attendances = DB::table('attendances')
+        ->orderBy('attendance_at', 'asc')
+        ->selectRaw('personal_interviews_attendances.id as pid, attendances.users_id, attendances.attendance_at, personal_interviews_attendances.start, personal_interviews_attendances.end, personal_interviews_attendances.created_at, personal_interviews_attendances.updated_at, @row:=@row-1 as row')->where('personal_interviews.id', $id)
+        ->join('personal_interviews', 'attendances.conferences_id', '=', 'personal_interviews.conferences_id')
+        ->leftjoin('personal_interviews_attendances', function ($join) {
+            $join->on('personal_interviews.id', '=', 'personal_interviews_id')
+                ->on('attendances.users_id', '=', 'personal_interviews_attendances.users_id');
+        })->get();
+
+        //dd($attendances->toSql(), $attendances->getBindings());
 
         return view('personal_interview.situation', [
             'attendances' => $attendances,
