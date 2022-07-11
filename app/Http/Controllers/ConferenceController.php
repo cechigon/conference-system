@@ -19,6 +19,14 @@ class ConferenceController extends Controller
         ]);
     }
 
+    public function qr($id)
+    {
+        $conferences = Conferences::find($id);
+        return view('conference.qr', [
+            'conference' => $conferences
+        ]);
+    }
+
     public function create()
     {
         return view('conference.create');

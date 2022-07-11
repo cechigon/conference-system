@@ -26,6 +26,9 @@ Route::get('/dashboard', function () {
 Route::get('/conference', [ConferenceController::class, 'list'])
     ->name('conference.list');
 
+Route::get('/qr/{id}', [ConferenceController::class, 'qr'])
+    ->name('conference.qr');
+
 Route::get('/conference/entry/{id}', [ConferenceController::class, 'entry'])
     ->name('conference.entry');
 
