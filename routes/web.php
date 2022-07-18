@@ -16,8 +16,8 @@ use App\Http\Controllers\PersonalInterviewController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('home');
+})->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -49,6 +49,10 @@ Route::get('/conference/create', [ConferenceController::class, 'create'])
 
 Route::post('/conference/created', [ConferenceController::class, 'created'])
     ->name('conference.created');
+
+Route::get('/personal_interview', function () {
+    return view('personal_interview.personal');
+})->name('personal');
 
 Route::get('/personal_interview/create', [PersonalInterviewController::class, 'create'])
     ->name('personal_interview.created');
