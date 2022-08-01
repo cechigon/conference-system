@@ -24,8 +24,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ConferencesTableSeeder::class,
             Personal_interviewsTableSeeder::class,
-            Personal_interviews_attendancesTableSeeder::class,
-            AttendancesTableSeeder::class,
+            //Personal_interviews_attendancesTableSeeder::class,
+            //AttendancesTableSeeder::class,
         ]);
     }
 }

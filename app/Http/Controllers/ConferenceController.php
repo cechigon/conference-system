@@ -45,7 +45,7 @@ class ConferenceController extends Controller
         $conference->location = $request->location;
         $conference->note = $request->note;
         $conference->attendances_url = uniqid();
-        $conference->author = 99;
+        $conference->author = Auth::id();
 
         $conference->save();
 
@@ -54,7 +54,7 @@ class ConferenceController extends Controller
 
     public function entry($id)
     {
-        $attendance = Attendances::where('conferences_id', $id)->where('users_id', 1)->get()->first();
+        $attendance = Attendances::where('conferences_id', $id)->where('users_id', Auth::id())->get()->first();
         $conference = Conferences::find($id);
 
         return view('conference.entry', [
@@ -65,11 +65,11 @@ class ConferenceController extends Controller
 
     public function registration(Request $request)
     {
-        if (empty(Attendances::where('conferences_id', $request->conference_id)->where('users_id', 1)->get()->first())) {
+        if (empty(Attendances::where('conferences_id', $request->conference_id)->where('users_id',  Auth::id())->get()->first())) {
             $attendance = new Attendances();
 
             $attendance->conferences_id = $request->conference_id;
-            $attendance->users_id = 1;
+            $attendance->users_id = Auth::id();
             $attendance->father = ($request->father == 'father');
             $attendance->mother = ($request->mother == 'mother');
             $attendance->other = ($request->other == 'other');
@@ -80,10 +80,10 @@ class ConferenceController extends Controller
 
             $attendance->save();
         } else {
-            $attendance = Attendances::where('conferences_id', $request->conference_id)->where('users_id', 1)->get()->first();
+            $attendance = Attendances::where('conferences_id', $request->conference_id)->where('users_id', Auth::id())->get()->first();
 
             $attendance->conferences_id = $request->conference_id;
-            $attendance->users_id = 1;
+            $attendance->users_id = Auth::id();
             $attendance->father = ($request->father == 'father');
             $attendance->mother = ($request->mother == 'mother');
             $attendance->other = ($request->other == 'other');
@@ -111,11 +111,11 @@ class ConferenceController extends Controller
 
     public function attendanced(Request $request)
     {
-        if (empty(Attendances::where('conferences_id', $request->conference_id)->where('users_id', 1)->get()->first())) {
+        if (empty(Attendances::where('conferences_id', $request->conference_id)->where('users_id', Auth::id())->get()->first())) {
             #未登録
         } else {
-            if (empty(Attendances::where('conferences_id', $request->conference_id)->where('users_id', 1)->first()->attendance)) {
-                $attendance = Attendances::where('conferences_id', $request->conference_id)->where('users_id', 1)->get()->first();
+            if (empty(Attendances::where('conferences_id', $request->conference_id)->where('users_id', Auth::id())->first()->attendance)) {
+                $attendance = Attendances::where('conferences_id', $request->conference_id)->where('users_id', Auth::id())->get()->first();
 
                 $attendance->attendance = true;
                 $attendance->attendance_at = Carbon::now();

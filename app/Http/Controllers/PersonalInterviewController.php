@@ -7,6 +7,7 @@ use App\Models\Personal_interviews;
 use App\Models\Personal_interviews_attendances;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class PersonalInterviewController extends Controller
 {
@@ -45,7 +46,7 @@ class PersonalInterviewController extends Controller
             $attendance = new Personal_interviews_attendances();
 
             $attendance->personal_interviews_id = $request->personal_interviews_id;
-            $attendance->users_id = 1;
+            $attendance->users_id = Auth::id();
 
             $attendance->save();
         }
