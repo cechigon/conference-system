@@ -33,7 +33,7 @@
                         <p>作成日 : {{ date('Y/m/d H:i:s', strtotime($conference->created_at)) }}</p>
                         <p>更新⽇ : {{ date('Y/m/d H:i:s', strtotime($conference->updated_at)) }}</p>
                         <p><a href="{{ route('conference.entry', ['id' => $conference->id]) }}">出欠確認</a></p>
-                        <p>{!! QrCode::size(300)->generate('http://localhost:8000/conference/attendance/' . $conference->attendances_url) !!}</p>
+                        <p>{!! QrCode::size(300)->generate('http://192.168.50.19:30001/conference/attendance/' . $conference->attendances_url) !!}</p>
                     </article>
                 </div>
             </div>
